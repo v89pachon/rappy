@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquitectura Base de Datos NoSQL - Rappy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Propuesta de Arquitectura de Bases de Datos NoSQL para Rappy</h1>
+        <p>Diseño de Solución para Escalabilidad y Disponibilidad</p>
+    </header>
+
+    <section id="empresa">
+        <h2>1. Presentación de la Empresa</h2>
+        <div class="content-block">
+            <!-- Contenido sobre Rappy aquí -->
+            <h3>Rappy: Un Líder en la Entrega a Domicilio</h3>
+            <p>Rappy es una plataforma tecnológica que conecta a consumidores con comercios locales y repartidores, facilitando la entrega de diversos productos a domicilio. Su modelo de negocio se basa en la rapidez, la conveniencia y la amplia oferta de servicios.</p>
+            <p><strong>Misión:</strong> Facilitar la vida de nuestros usuarios ofreciendo un servicio de entrega rápido, confiable y accesible.</p>
+            <p><strong>Visión:</strong> Ser la plataforma de entrega a domicilio preferida en Latinoamérica, impulsando el crecimiento de los comercios locales y generando oportunidades para los repartidores.</p>
+            <p><strong>Principales Características:</strong></p>
+            <ul>
+                <li>Amplia red de comercios asociados (restaurantes, supermercados, farmacias, etc.).</li>
+                <li>Flota de repartidores independientes.</li>
+                <li>Aplicación móvil intuitiva para usuarios, comercios y repartidores.</li>
+                <li>Procesamiento de miles de transacciones diarias.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="problematicas">
+        <h2>2. Descripción de la Problemática Seleccionada</h2>
+        <div class="content-block">
+            <!-- Contenido sobre la problemática aquí -->
+            <h3>Desafíos de Escalabilidad y Disponibilidad en Rappy</h3>
+            <p>Con el crecimiento exponencial de usuarios, comercios y pedidos, Rappy enfrenta desafíos significativos para mantener la escalabilidad y la alta disponibilidad de su plataforma. Los sistemas de bases de datos relacionales tradicionales pueden presentar limitaciones cuando se manejan volúmenes masivos de datos transaccionales, geolocalización en tiempo real, y la necesidad de baja latencia en las operaciones críticas.</p>
+            <p><strong>Problemáticas Específicas:</strong></p>
+            <ul>
+                <li><strong>Volumen de Datos:</strong> Manejo de grandes volúmenes de datos de usuarios, pedidos, ubicaciones, transacciones, historiales, etc.</li>
+                <li><strong>Tráfico Pico:</strong> Soportar picos de demanda durante horas clave (almuerzo, cena) y eventos especiales sin degradación del servicio.</li>
+                <li><strong>Latencia:</strong> Garantizar respuestas rápidas en la búsqueda de comercios, seguimiento de pedidos en tiempo real y procesamiento de pagos.</li>
+                <li><strong>Disponibilidad:</strong> Minimizar el tiempo de inactividad para asegurar una experiencia de usuario continua y confiable.</li>
+                <li><strong>Flexibilidad del Esquema:</strong> Necesidad de adaptarse rápidamente a nuevas funcionalidades y tipos de datos sin ciclos de migración complejos.</li>
+            </ul>
+            <p>La elección de una arquitectura NoSQL es fundamental para abordar estas problemáticas de manera eficiente.</p>
+        </div>
+    </section>
+
+    <section id="tratamiento-datos">
+        <h2>3. Descripción del Modelo de Tratamiento de Datos Elegido</h2>
+        <div class="content-block">
+            <!-- Descripción del modelo NoSQL elegido -->
+            <h3>Modelo de Tratamiento de Datos: Base de Datos Orientada a Documentos (MongoDB)</h3>
+            <p>Para Rappy, proponemos una arquitectura basada en una base de datos orientada a documentos, específicamente utilizando MongoDB. Este modelo es ideal por su flexibilidad, escalabilidad horizontal y su capacidad para manejar datos semiestructurados y estructurados de manera eficiente.</p>
+            <p><strong>Justificación:</strong></p>
+            <ul>
+                <li><strong>Flexibilidad de Esquema:</strong> Permite almacenar documentos (pedidos, perfiles de usuario, información de comercios) en formatos JSON/BSON, que pueden variar sin afectar otras entradas. Esto es crucial para la rápida iteración de Rappy.</li>
+                <li><strong>Escalabilidad Horizontal:</strong> MongoDB soporta sharding (particionamiento) y replicación de forma nativa, lo que permite escalar el sistema distribuyendo la carga entre múltiples servidores.</li>
+                <li><strong>Rendimiento:</strong> Optimizado para cargas de trabajo de lectura/escritura intensivas, comunes en operaciones de Rappy.</li>
+                <li><strong>Tipos de Datos:</strong> Capacidad para almacenar datos complejos como listas, objetos anidados, y datos geoespaciales, útiles para la localización de repartidores y comercios.</li>
+            </ul>
+            <p><strong>Ejemplo de Documentos:</strong></p>
+            <ul>
+                <li><strong>Documento de Pedido:</strong> Incluye detalles del usuario, comercios, ítems, estado, historial de ubicación, pago, etc.</li>
+                <li><strong>Documento de Usuario:</strong> Información personal, direcciones, historial de pedidos, preferencias.</li>
+                <li><strong>Documento de Comercio:</strong> Nombre, menú, horarios, ubicación, calificaciones, información de contacto.</li>
+                <li><strong>Documento de Repartidor:</strong> Perfil, estado de disponibilidad, historial de entregas, información de geolocalización actual.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="diagrama-flujo">
+        <h2>4. Diagrama de Flujo del Esquema de Tratamiento de Datos</h2>
+        <div class="content-block">
+            <!-- Insertar diagrama de flujo aquí -->
+            <h3>Diagrama de Flujo de Datos</h3>
+            <p>El siguiente diagrama ilustra el flujo de datos desde la ingesta hasta el almacenamiento y procesamiento en la arquitectura NoSQL propuesta:</p>
+            <!-- Puedes insertar una imagen SVG o un enlace a una imagen aquí -->
+            <div class="diagram-placeholder">
+                <img src="ruta/a/tu/diagrama_flujo.png" alt="Diagrama de Flujo de Datos NoSQL para Rappy" style="max-width: 100%; height: auto;">
+                <!-- Ejemplo: Si usas SVG -->
+                <!-- <svg width="800" height="500" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg"> -->
+                    <!-- Aquí iría tu código SVG para el diagrama -->
+                <!-- </svg> -->
+            </div>
+            <p><strong>Descripción del Flujo:</strong></p>
+            <ol>
+                <li><strong>Ingesta de Datos:</strong> Aplicaciones móviles (usuario, repartidor) y sistema web (comercio) envían datos (nuevos pedidos, actualizaciones de estado, ubicaciones, etc.) a través de APIs.</li>
+                <li><strong>Procesamiento y Validación:</strong> Un conjunto de microservicios procesan y validan estos datos.</li>
+                <li><strong>Almacenamiento NoSQL:</strong> Los datos validados se almacenan en la base de datos MongoDB, distribuida en clústeres.</li>
+                <li><strong>Consultas y Acceso:</strong> Los microservicios y aplicaciones consultan la base de datos para obtener información en tiempo real (estado del pedido, ubicación del repartidor, comercios cercanos).</li>
+                <li><strong>Análisis y Reporting:</strong> Los datos históricos se pueden exportar o procesar para análisis, generación de reportes, machine learning, etc.</li>
+                <li><strong>Replicación:</strong> Los datos se replican en diferentes nodos para alta disponibilidad y tolerancia a fallos.</li>
+                <li><strong>Particionamiento (Sharding):</strong> Los datos se distribuyen entre múltiples servidores (shards) para escalabilidad horizontal.</li>
+            </ol>
+        </div>
+    </section>
+
+    <section id="replicacion-escalabilidad">
+        <h2>5. Esquema de Replicación y Particionamiento</h2>
+        <div class="content-block">
+            <!-- Esquema de replicación y particionamiento -->
+            <h3>Estrategia de Replicación y Particionamiento en MongoDB</h3>
+            <p>Para garantizar alta disponibilidad y escalabilidad, implementaremos un esquema robusto de replicación y particionamiento utilizando las funcionalidades nativas de MongoDB.</p>
+            
+            <h4>Replicación:</h4>
+            <p>Se utilizarán <strong>Replica Sets</strong> para la replicación. Un Replica Set es un grupo de servidores MongoDB que mantienen el mismo conjunto de datos. Proporciona redundancia y alta disponibilidad.</p>
+            <ul>
+                <li><strong>Configuración Propuesta:</strong> Se recomienda un mínimo de 3 nodos (servidores) para un Replica Set. En un entorno de producción, se pueden tener más nodos para redundancia adicional.</li>
+                <li><strong>Rol de Nodos:</strong> Dentro de un Replica Set, un nodo es el <strong>primario</strong> (maneja todas las escrituras) y los otros son <strong>secundarios</strong> (replican los datos del primario). Si el primario falla, uno de los secundarios es elegido automáticamente como nuevo primario (failover).</li>
+                <li><strong>Beneficios:</strong>
+                    <ul>
+                        <li><strong>Alta Disponibilidad:</strong> El servicio sigue operativo incluso si uno o varios nodos fallan.</li>
+                        <li><strong>Recuperación ante Desastres:</strong> Los datos están respaldados en múltiples ubicaciones.</li>
+                        <li><strong>Balanceo de Carga de Lectura:</strong> Las lecturas se pueden dirigir a los nodos secundarios para reducir la carga en el primario (configurable).</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>Particionamiento (Sharding):</strong></h4>
+            <p>El sharding es el proceso de distribuir datos a través de múltiples máquinas (shards). Cada shard es un Replica Set independiente. Esto permite a Rappy escalar horizontalmente para manejar grandes volúmenes de datos y altas tasas de transferencia.</p>
+            <ul>
+                <li><strong>Componentes Clave:</strong>
+                    <ul>
+                        <li><strong>Shards:</strong> Colecciones de datos. Cada shard es un Replica Set.</li>
+                        <li><strong>Mongos:</strong> Servidores de balanceo de consultas que dirigen las operaciones a los shards correctos.</li>
+                        <li><strong>Config Servers:</strong> Almacenan el metadato del clúster (mapa de shards).</li>
+                    </ul>
+                </li>
+                <li><strong>Clave de Shard:</strong> La elección de una clave de shard adecuada es CRÍTICA. Para Rappy, se podrían considerar claves como:
+                    <ul>
+                        <li><strong>`_id` del pedido:</strong> Si los pedidos se acceden principalmente por su ID.</li>
+                        <li><strong>`user_id`:</strong> Si las consultas se centran en los datos de un usuario.</li>
+                        <li><strong>`restaurant_id`:</strong> Si las consultas se centran en los datos de un comercio.</li>
+                        <li><strong>Geo-location:</strong> Para consultas basadas en ubicación.</li>
+                    </ul>
+                    La clave de shard debe distribuir las operaciones de manera uniforme y minimizar las consultas que requieren acceso a múltiples shards (scatter-gather queries). Una estrategia híbrida podría ser necesaria.</li>
+                <li><strong>Estrategia de Particionamiento para Rappy:</strong>
+                    <p>Se podría comenzar particionando colecciones críticas como <code>orders</code>, <code>users</code> y <code>restaurants</code>. Por ejemplo, para la colección <code>orders</code>, particionar por `user_id` podría ser efectivo si la mayoría de las operaciones son de consulta por usuario. Si las operaciones son más distribuidas o por geolocalización, se podría necesitar una clave de shard más compleja o una estrategia de chunking basada en rangos.</p>
+                </li>
+                <li><strong>Beneficios:</strong>
+                    <ul>
+                        <li><strong>Escalabilidad Ilimitada:</strong> Permite añadir más shards para aumentar la capacidad de almacenamiento y rendimiento.</li>
+                        <li><strong>Distribución de Carga:</strong> Las operaciones se distribuyen, evitando cuellos de botella en un solo servidor.</li>
+                        <li><strong>Alta Disponibilidad a Nivel de Cluster:</strong> La falla de un shard no detiene todo el sistema (si se configura correctamente con Replica Sets).</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="modelo-arquitectura">
+        <h2>6. Modelo de Arquitectura</h2>
+        <div class="content-block">
+            <!-- Modelo de Arquitectura -->
+            <h3>Arquitectura General de la Solución NoSQL</h3>
+            <p>La arquitectura propuesta integra la base de datos NoSQL (MongoDB) con los componentes existentes y nuevos de Rappy, enfocándose en microservicios para una mayor modularidad y escalabilidad.</p>
+            
+            <!-- Puedes insertar un diagrama de arquitectura aquí, similar al diagrama de flujo -->
+            <div class="diagram-placeholder">
+                <img src="ruta/a/tu/arquitectura_mongodb.png" alt="Diagrama de Arquitectura NoSQL para Rappy" style="max-width: 100%; height: auto;">
+            </div>
+
+            <p><strong>Componentes Clave:</strong></p>
+            <ul>
+                <li><strong>Aplicaciones Cliente:</strong>
+                    <ul>
+                        <li><strong>App Móvil Usuario:</strong> Interfaz para buscar comercios, hacer pedidos, rastrear entregas.</li>
+                        <li><strong>App Móvil Repartidor:</strong> Interfaz para aceptar/rechazar pedidos, actualizar estado, recibir ubicaciones.</li>
+                        <li><strong>Panel Web Comercio:</strong> Interfaz para gestionar menú, pedidos, promociones.</li>
+                    </ul>
+                </li>
+                <li><strong>API Gateway:</strong> Punto de entrada único para todas las solicitudes de los clientes. Dirige las solicitudes a los microservicios apropiados.</li>
+                <li><strong>Microservicios:</strong>
+                    <ul>
+                        <li><strong>Servicio de Usuarios:</strong> Gestiona perfiles, autenticación, preferencias. Interactúa con la colección <code>users</code>.</li>
+                        <li><strong>Servicio de Comercios:</strong> Gestiona información de comercios, menús, horarios. Interactúa con la colección <code>restaurants</code>.</li>
+                        <li><strong>Servicio de Pedidos:</strong> Orquesta el ciclo de vida del pedido. Interactúa con la colección <code>orders</code>.</li>
+                        <li><strong>Servicio de Geolocalización:</strong> Rastrea la ubicación de repartidores en tiempo real. Interactúa con colecciones para `driver_locations` o puede usar bases de datos especializadas si es necesario, pero puede ser integrado con MongoDB si se usa adecuadamente.</li>
+                        <li><strong>Servicio de Pagos:</strong> Procesa transacciones financieras.</li>
+                        <li><strong>Servicio de Notificaciones:</strong> Envía alertas y actualizaciones.</li>
+                    </ul>
+                </li>
+                <li><strong>Base de Datos NoSQL (MongoDB Cluster):</strong>
+                    <ul>
+                        <li><strong>Replica Sets:</strong> Garantizan alta disponibilidad para cada shard.</li>
+                        <li><strong>Shards:</strong> Distribuyen los datos de colecciones grandes (<code>orders</code>, <code>users</code>, <code>restaurants</code>, <code>driver_locations</code>) para escalabilidad.</li>
+                        <li><strong>Config Servers:</strong> Gestionan el estado del clúster.</li>
+                        <li><strong>Mongos:</strong> Routers que dirigen las consultas a los shards.</li>
+                    </ul>
+                </li>
+                <li><strong>Servicio de Analítica/Data Lake:</strong> Procesa datos históricos para insights de negocio, machine learning, etc. Puede consumir datos directamente del clúster NoSQL o de un pipeline de ETL.</li>
+            </ul>
+            <p>Esta arquitectura permite que cada microservicio tenga su propia base de datos (o colecciones dentro del clúster principal), desacoplando los servicios y permitiendo la escalabilidad independiente de cada uno.</p>
+        </div>
+    </section>
+
+    <section id="apreciaciones-finales">
+        <h2>7. Apreciaciones Finales</h2>
+        <div class="content-block">
+            <!-- Apreciaciones finales -->
+            <h3>Cumplimiento de las Necesidades Organizacionales</h3>
+            <p>La arquitectura NoSQL propuesta, centrada en MongoDB, aborda de manera efectiva las necesidades organizacionales de Rappy:</p>
+            
+            <h4>Escalabilidad:</h4>
+            <p>El uso de sharding nativo en MongoDB permite escalar la capacidad de almacenamiento y procesamiento horizontalmente, adaptándose al crecimiento continuo de usuarios, pedidos y datos. La adición de nuevos shards es un proceso relativamente sencillo para manejar el aumento de la demanda.</p>
+            
+            <h4>Alta Disponibilidad:</h4>
+            <p>La implementación de Replica Sets asegura que el servicio permanezca operativo ante fallos de hardware o software. El mecanismo de failover automático minimiza el tiempo de inactividad, crucial para la experiencia del usuario y la continuidad del negocio.</p>
+            
+            <h4>Rendimiento y Latencia:</h4>
+            <p>El modelo de documentos y las optimizaciones de MongoDB permiten consultas rápidas para las operaciones críticas como la búsqueda de comercios, el seguimiento de pedidos en tiempo real y la gestión de perfiles. La capacidad de realizar lecturas en nodos secundarios ayuda a mantener baja latencia incluso bajo alta carga.</p>
+            
+            <h4>Flexibilidad y Agilidad:</h4>
+            <p>El esquema flexible de MongoDB facilita la rápida iteración y adición de nuevas funcionalidades. Rappy puede introducir nuevos campos de datos o modificar estructuras sin la complejidad y el tiempo de inactividad asociados a las migraciones de esquemas en bases de datos relacionales tradicionales.</p>
+            
+            <h4>Coste-Efectividad:</strong></h4>
+            <p>Si bien la inversión inicial en infraestructura puede ser considerable, la escalabilidad horizontal y la eficiencia en el manejo de grandes volúmenes de datos pueden resultar más costo-efectivas a largo plazo en comparación con la escala vertical de sistemas relacionales muy grandes.</p>
+
+            <p><strong>Conclusión:</strong> La arquitectura diseñada con MongoDB proporciona una base sólida y escalable para soportar las operaciones actuales y futuras de Rappy, garantizando un servicio confiable y de alto rendimiento para sus millones de usuarios.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Tu Nombre / Tu Grupo. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
